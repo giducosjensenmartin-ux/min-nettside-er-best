@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyWebsite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.umd.js"></script>
+  </head>
+
+  <body class="bg-white text-slate-900">
+    <div id="root"></div>
+
+    <script type="text/javascript">
+      const { useState } = React;
+      const { motion } = window["framer-motion"];
+
+      function App() {
+        const [theme, setTheme] = useState("light");
+        const [name, setName] = useState("");
+        const [email, setEmail] = useState("");
+        const [message, setMessage] = useState("");
+        const [submitted, setSubmitted] = useState(false);
+
+        const toggleTheme = () =>
+          setTheme((t) => (t === "light" ? "dark" : "light"));
+
+        const submitForm = (e) => {
+          e.preventDefault();
+          if (!name.trim() || !email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+            alert("Please enter a valid name and email.");
+            return;
+          }
+          setSubmitted(true);
+          setTimeout(() => {
+            setName("");
+            setEmail("");
+            setMessage("");
+          }, 400);
+        };
+
+        return React.createElement(
+          "div",
+          {
+            className:
+              theme === "dark"
+                ? "min-h-screen bg-slate-900 text-slate-100"
+                : "min-h-screen bg-white text-slate-900",
+          },
+          React.createElement(
+            "header",
+            { className: "max-w-6xl mx-auto px-6 py-6 flex items-center justify-between" },
+            React.createElement(
+              "div",
+              { className: "flex items-center gap-3" },
+              React.createElement(
+                "div",
+                { className: "w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold" },
+                "MW"
+              ),
+              React.createElement(
+                "div",
+                null,
+                React.createElement("h1", { className: "text-lg font-semibold" }, "MyWebsite"),
+                React.createElement("p", { className: "text-xs opacity-70" }, "Modern landing · Single-file")
+              )
+            ),
+            React.createElement(
+              "nav",
+              { className: "flex items-center gap-4" },
+              React.createElement("a", { href: "#features", className: "hidden md:inline-block px-3 py-2 rounded-md hover:bg-slate-100/50" }, "Features"),
+              React.createElement("a", { href: "#pricing", className: "hidden md:inline-block px-3 py-2 rounded-md hover:bg-slate-100/50" }, "Pricing"),
+              React.createElement("a", { href: "#contact", className: "hidden md:inline-block px-3 py-2 rounded-md hover:bg-slate-100/50" }, "Contact"),
+              React.createElement(
+                "button",
+                { onClick: toggleTheme, className: "p-2 rounded-md hover:bg-slate-100/30" },
+                theme === "dark" ? "☀️" : "🌙"
+              )
+            )
+          ),
+          React.createElement(
+            "main",
+            { className: "max-w-6xl mx-auto px-6 py-12" },
+            React.createElement(
+              "section",
+              { className: "text-center" },
+              React.createElement(
+                motion.h2,
+                { initial: { y: 20, opacity: 0 }, animate: { y: 0, opacity: 1 }, transition: { duration: 0.5 }, className: "text-4xl font-extrabold leading-tight" },
+                "Build a beautiful website — fast."
+              ),
+              React.createElement(
+                "p",
+                { className: "mt-4 text-lg opacity-80" },
+                "A clean, responsive template to get your product, portfolio, or agency off the ground."
+              ),
+              React.createElement(
+                "div",
+                { className: "mt-6 flex justify-center gap-3" },
+                React.createElement("a", { href: "#contact", className: "inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 text-white font-semibold shadow-lg hover:shadow-xl" }, "Get started"),
+                React.createElement("a", { href: "#features", className: "inline-flex items-center gap-2 px-4 py-3 rounded-xl border" }, "See features")
+              )
+            )
+          ),
+          React.createElement(
+            "footer",
+            { className: "mt-12 py-8 border-t text-center text-sm opacity-80" },
+            `© ${new Date().getFullYear()} MyWebsite · Built with ❤️`
+          )
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
